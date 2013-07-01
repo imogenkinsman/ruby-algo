@@ -1,50 +1,28 @@
-require 'benchmark'
-
-#start = Time.now
-
-=begin
-if ARGV.size != 3
-  abort("Input should be: [naive/kmp] string substring")
-end
-
-naive = true
-
-if ARGV[0] == "kmp"
-  naive = false
-end
-
-string = ARGV[1]
-substring = ARGV[2]
-=end
-
-string = "a" * 9999
-substring = "a" * 999 + "b"
-
-
-# a naive method of substring searching
-# complexity is O(nm), where n is the length of the string and m is the length of the substring
-def naive(string, substring)
-  start_index = 0
-  #cur_index = 0
-  while start_index < string.length
-    k = 0
-    match = true
-    while k < substring.length
-      if string[start_index + k] != substring[k]
-        match = false
-        break
+module Substr
+  # a naive method of substring searching
+  # complexity is O(nm), where n is the length of the string and m is the length of the substring
+  def naive(string, substring)
+    start_index = 0
+    #cur_index = 0
+    while start_index < string.length
+      k = 0
+      match = true
+      while k < substring.length
+        if string[start_index + k] != substring[k]
+          match = false
+          break
+        end
+        k += 1
       end
-      k += 1
+      return start_index if match
+      start_index += 1
     end
-    return start_index if match
-    start_index += 1
+    return false
   end
-  return false
-end
 
 # the excellent knuth-morriss-pratt algorithm, which runs in O(n+m)
-def kmp(text, pattern)
-# preprocess the pattern
+  def kmp(text, pattern)
+  # preprocess the pattern
   pos = 1
   failure_table = [0]
   compare = 0
@@ -58,33 +36,22 @@ def kmp(text, pattern)
     pos += 1
   end
 
-# match string
+  # match string
+    pos = 0
+    compare = 0
+    while pos < text.length
+      if text[pos] == pattern[compare]
+        compare += 1
+      else
+        compare = failure_table[compare]
+      end
 
-  pos = 0
-  compare = 0
-  while pos < text.length
-    if text[pos] == pattern[compare]
-      compare += 1
-    else
-      compare = failure_table[compare]
-    end
-
-    pos += 1
-    if compare == pattern.length
-      return pos - compare
-    end
-  end 
-  return false
-end
-
-Benchmark.bm do |bm|
-  bm.report('naive') do
-    result = naive(string, substring)
-    puts " | result = #{result}"
-  end
-  bm.report('kmp') do
-    result = kmp(string, substring)
-    puts " | result = #{result}"
+      pos += 1
+      if compare == pattern.length
+        return pos - compare
+      end
+    end 
+    return false
   end
 end
 
