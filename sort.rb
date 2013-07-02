@@ -19,12 +19,20 @@ module Sort
         end
         i += 1
       end
-      break if !continue_sort
+      break unless continue_sort
     end
   end
 
   # another O(n^2) meh algo
   def insertionsort(num_array)
-
+    num_array.each_index do |i|
+      value = num_array[i]
+      hole_position = i
+      while hole_position > 0 and value < num_array[hole_position - 1]
+        num_array[hole_position] = num_array[hole_position - 1]
+        hole_position -= 1
+      end
+      num_array[hole_position] = value
+    end
   end
 end

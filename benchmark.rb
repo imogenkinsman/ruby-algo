@@ -34,4 +34,7 @@ Benchmark.bm do |bm|
   bm.report('bubblesort') do
     Sort.bubblesort(num_array.dup)
   end
+  bm.report('insertionsort') do
+    Sort.insertionsort(num_array.dup)
+  end
 end
