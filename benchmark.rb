@@ -28,13 +28,16 @@ end
 
 Benchmark.bm do |bm|
   #not even worth benchmarking - a fairly small n won't (on average) complete before the sun consumes its available hydrogen
-  #bm.report('bogosort') do
+  #bm.report('bogo sort') do
   #  bogosort(num_array)
   #end
-  bm.report('bubblesort') do
+  bm.report('bubble sort') do
     Sort.bubblesort(num_array.dup)
   end
-  bm.report('insertionsort') do
+  bm.report('insertion sort') do
     Sort.insertionsort(num_array.dup)
+  end
+  bm.report('merge sort') do
+    Sort.mergesort(num_array.dup)
   end
 end
