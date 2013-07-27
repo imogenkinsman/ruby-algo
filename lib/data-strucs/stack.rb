@@ -6,8 +6,11 @@
   The simplicity of the data structure means that pushing and popping are O(1)
 =end
 
+require_relative "node"
+
 class Stack
   include Enumerable
+  attr_reader :size
 
   def initialize(ary = [])
     @front = nil
@@ -17,23 +20,34 @@ class Stack
   end
 
   def push(element)
-
+    last_node = @back
+    new_node = Node.new(element)
+    last_node.right = new_node unless last_node.nil?
+    new_node.left = last_node
+    @front ||= new_node
+    @size += 1
+    @back = new_node
   end
 
   def pop
-
+    return nil if @size == 0
+    ret_val = @back.value
+    @back = @back.left
+    @back.right = nil
+    @size -= 1
+    return ret_val
   end
 
   def peek
-
-  end
-
-  def size
-
+    return @back.value
   end
 
   def each(&block)
-    @data_struc.reverse_each(&block)
+    current_element = @back
+    until current_element.nil?
+      block.call(current_element.value)
+      current_element = current_element.left
+    end
   end
 
 end

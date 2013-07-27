@@ -1,4 +1,4 @@
-// Your standard double-ended queue ("deque") data structure
+# Your standard double-ended queue ("deque") data structure
 
 class Deque
   include Enumerable
