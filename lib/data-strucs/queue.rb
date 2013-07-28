@@ -3,6 +3,16 @@
 
 =end
 
-class Queue
+require_relative "node"
 
+class Queue
+  include Enumerable
+
+  def initialize(ary = [])
+
+  end
+
+  def each(&block)
+
+  end
 end

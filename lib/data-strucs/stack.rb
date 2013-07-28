@@ -33,13 +33,14 @@ class Stack
     return nil if @size == 0
     ret_val = @back.value
     @back = @back.left
-    @back.right = nil
+    @back.right = nil unless @back.nil?
     @size -= 1
     return ret_val
   end
 
+  # returns nil for empty stack, or the value of the element "on top"
   def peek
-    return @back.value
+    return @back.nil? ? nil : @back.value
   end
 
   def each(&block)
