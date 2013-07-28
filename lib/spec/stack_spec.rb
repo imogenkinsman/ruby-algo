@@ -26,3 +26,19 @@ describe "stack" do
   end
 
 end
+
+describe "a stack created via an array argument" do
+  before(:each) do
+    @stack = Stack.new([3, 5, 6, 2, 8])
+  end
+
+  it "should have the correct size and top-most value" do
+    @stack.peek.should eql 8
+    @stack.size.should eql 5
+  end
+
+  it "should function correctly with Enumerable mixin functions" do
+    @stack.inject{|sum, element| sum + element }.should eql 24
+  end
+
+end
