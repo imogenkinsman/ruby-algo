@@ -12,8 +12,8 @@ module Sort
     loop do
       continue_sort = false
       i = 0
-      ary.each_index do |i|
-        if (i + 1 < ary.size) && ary[i] > ary[i + 1]
+      0.upto(ary.size - 2) do |i|
+        if ary[i] > ary[i + 1]
           continue_sort = true
           ary[i], ary[i + 1] = ary[i + 1], ary[i]
         end
