@@ -8,19 +8,19 @@ module Sort
   end
 
   # O(n^2) worst case, though O(n) for already sorted arrays
-  def bubblesort(num_array)
+  def bubblesort(ary)
     loop do
       continue_sort = false
       i = 0
-      while i + 1 < num_array.size
-        if num_array[i] > num_array[i + 1]
+      ary.each_index do |i|
+        if (i + 1 < ary.size) && ary[i] > ary[i + 1]
           continue_sort = true
-          num_array[i], num_array[i + 1] = num_array[i + 1], num_array[i]
+          ary[i], ary[i + 1] = ary[i + 1], ary[i]
         end
-        i += 1
       end
       break unless continue_sort
     end
+    return ary
   end
 
   # another O(n^2) meh algo
