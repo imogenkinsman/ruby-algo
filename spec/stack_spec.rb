@@ -8,21 +8,21 @@ describe "stack" do
   end
 
   it "should be empty when creating a new stack" do
-    @stack.size.should eql 0
-    @stack.peek.should be_nil
+    expect(@stack.size).to eq 0
+    expect(@stack.peek).to be_nil
   end
 
   it "should have a size of 1 after pushing an element" do
     @stack.push(3)
-    @stack.peek.should eql 3
-    @stack.size.should eql 1
+    expect(@stack.peek).to eq 3
+    expect(@stack.size).to eq 1
   end
 
   it "should return the value of a popped element" do
     @stack.push(3)
     val = @stack.pop
-    val.should eql 3
-    @stack.size.should eql 0
+    expect(val).to eq 3
+    expect(@stack.size).to eq 0
   end
 
 end
@@ -33,12 +33,12 @@ describe "a stack created via an array argument" do
   end
 
   it "should have the correct size and top-most value" do
-    @stack.peek.should eql 8
-    @stack.size.should eql 5
+    expect(@stack.peek).to eq 8
+    expect(@stack.size).to eq 5
   end
 
   it "should function correctly with Enumerable mixin functions" do
-    @stack.inject{|sum, element| sum + element }.should eql 24
+    expect(@stack.inject(:+)).to eq 24
   end
 
 end
