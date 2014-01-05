@@ -37,30 +37,20 @@ module Sort
   end
 
   def merge(left, right)
-    ret_array = []
-    until left.empty? or right.empty?
-        (left.first <=> right.first) == -1 ? ret_array << left.shift : ret_array << right.shift
+    ary = []
+    until left.empty? || right.empty?
+        ary << ((left.first <=> right.first) == -1 ? left.shift :  right.shift)
     end
-    return ret_array + left + right
+    return ary + left + right
   end
 
   # much better - this is O(nlogn) performance even for worst case
-  def mergesort(num_array)
-    if num_array.length <= 1
-      return num_array
-    end
-    left, right = [], []
-    middle = num_array.length / 2
-    num_array.each_index do |i|
-      if i < middle
-        left << num_array[i]
-      else
-        right << num_array[i]
-      end
-    end
-    left = mergesort(left)
-    right = mergesort(right)
-    return merge(left, right)
+  def mergesort(ary)
+    return ary if ary.length <= 1
+    half = ary.size / 2
+    left = ary[0...half]
+    right = ary[half..-1]
+    return merge(mergesort(left), mergesort(right))
   end
 
   private :merge

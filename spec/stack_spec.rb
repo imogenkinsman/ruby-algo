@@ -1,6 +1,6 @@
 # tests for data-strucs/stack.rb
 
-require '../data-strucs/stack'
+require '../lib/data-strucs/stack'
 
 describe "stack" do
   before(:each) do
